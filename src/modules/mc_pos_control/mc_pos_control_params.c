@@ -236,16 +236,28 @@ PARAM_DEFINE_FLOAT(MPC_XY_VEL_I, 0.02f);
 PARAM_DEFINE_FLOAT(MPC_XY_VEL_D, 0.01f);
 
 /**
- * Maximum horizontal velocity
+ * Nominal horizontal velocity
  *
- * Maximum horizontal velocity in AUTO mode and endpoint for position stabilized mode (POSCTRL).
+ * Normal horizontal velocity in AUTO mode and endpoint for position stabilized mode (POSCTRL).
  *
  * @unit m/s
  * @min 0.0
  * @decimal 2
  * @group Multicopter Position Control
  */
-PARAM_DEFINE_FLOAT(MPC_XY_VEL_MAX, 5.0f);
+PARAM_DEFINE_FLOAT(MPC_XY_CRUISE, 5.0f);
+
+/**
+ * Maximum horizontal velocity
+ *
+ * Maximum horizontal velocity in AUTO mode.
+ *
+ * @unit m/s
+ * @min 0.0
+ * @decimal 2
+ * @group Multicopter Position Control
+ */
+PARAM_DEFINE_FLOAT(MPC_XY_VEL_MAX, 20.0f);
 
 /**
  * Horizontal velocity feed forward

@@ -948,6 +948,7 @@ bool handle_command(struct vehicle_status_s *status_local, const struct safety_s
 	case vehicle_command_s::VEHICLE_CMD_DO_MOUNT_CONFIGURE:
 	case vehicle_command_s::VEHICLE_CMD_DO_TRIGGER_CONTROL:
 	case vehicle_command_s::VEHICLE_CMD_DO_VTOL_TRANSITION:
+	case vehicle_command_s::VEHICLE_CMD_DO_CHANGE_SPEED:
 		/* ignore commands that handled in low prio loop */
 		break;
 
@@ -3296,11 +3297,12 @@ void *commander_low_prio_loop(void *arg)
 			/* if we reach here, we have a valid command */
 			orb_copy(ORB_ID(vehicle_command), cmd_sub, &cmd);
 
-			/* ignore commands the high-prio loop handles */
+			/* ignore commands the high-prio loop or the navigator handles */
 			if (cmd.command == vehicle_command_s::VEHICLE_CMD_DO_SET_MODE ||
 			    cmd.command == vehicle_command_s::VEHICLE_CMD_COMPONENT_ARM_DISARM ||
 			    cmd.command == vehicle_command_s::VEHICLE_CMD_NAV_TAKEOFF ||
-			    cmd.command == vehicle_command_s::VEHICLE_CMD_DO_SET_SERVO) {
+			    cmd.command == vehicle_command_s::VEHICLE_CMD_DO_SET_SERVO ||
+			    cmd.command == vehicle_command_s::VEHICLE_CMD_DO_CHANGE_SPEED) {
 				continue;
 			}
 
